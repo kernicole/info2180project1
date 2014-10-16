@@ -1,0 +1,128 @@
+<html>
+<title> Script Source Code </title>
+<body>
+<br/>//Building an Address Book //    
+<br/>var bob = {
+<br/>    firstName: "Bob",
+<br/>    lastName: "Jones",
+<br/>    phoneNumber: "(650) 777-7777",
+<br/>    email: "bob.jones@example.com"
+<br/>};
+<br/>
+<br/>
+<br/>var mary = {
+<br/>    firstName: "Mary",
+<br/>    lastName: "Johnson",
+<br/>    phoneNumber: "(650) 888-8888",
+<br/>    email: "mary.johnson@example.com"
+<br/>};
+<br/>
+<br/>
+<br/>var contacts = [bob, mary];
+<br/>
+<br/>function printPerson(person) {
+<br/>    console.log(person.firstName + " " + person.lastName);
+<br/>}
+<br/>
+<br/>
+<br/>function list() {
+<br/>	var contactsLength = contacts.length;
+<br/>	for (var i = 0; i < contactsLength; i++) {
+<br/>		printPerson(contacts[i]);
+<br/>	}
+<br/>}
+<br/>
+<br/>//Create a search function
+<br/>
+<br/>
+<br/>function search (lastName){
+<br/>   var contactsLength = contacts.length;
+<br/>	for (var i = 0; i < contactsLength; i++) {
+<br/>	    if (contacts[i].lastName===lastName) {
+<br/>	        printPerson(contacts[i]);
+<br/>	    }
+<br/>	}
+<br/>};
+
+
+
+<br/>
+<br/>
+
+<br/>function add(firstName,lastName,email,phoneNumber)
+<br/>{
+<br/>    contacts[contacts.length] = {
+<br/>    firstName: firstName,
+<br/>    lastName: lastName,
+<br/>    phoneNumber: phoneNumber,
+<br/>    email: email
+<br/>};
+
+<br/>
+
+
+<br/>};
+
+
+<br/>add("Kerry-Ann","Lewis","kerry.lewis@gmail", 8764778577);
+<br/>
+<br/>list();
+
+
+
+
+
+
+<br/>//Building a Cash Register//
+
+
+
+<br/>function StaffMember(name,discountPercent){
+<br/>    this.name = name;
+ <br/>   this.discountPercent = discountPercent;
+<br/>}
+<br/>
+<br/>var sally = new StaffMember("Sally",5);
+<br/>var bob = new StaffMember("Bob",10);
+
+<br/>// Create yourself again as 'me' with a staff discount of 20%
+<br/>var me = new StaffMember("Bob",20);
+
+<br/>var cashRegister = {
+<br/>    total:0,
+<br/>    lastTransactionAmount: 0,
+<br/>    add: function(itemCost){
+<br/>        this.total += (itemCost || 0);
+<br/>        this.lastTransactionAmount = itemCost;
+<br/>    },
+<br/>    scan: function(item,quantity){
+ <br/>       switch (item){
+ <br/>       case "eggs": this.add(0.98 * quantity); break;
+ <br/>       case "milk": this.add(1.23 * quantity); break;
+ <br/>       case "magazine": this.add(4.99 * quantity); break;
+  <br/>      case "chocolate": this.add(0.45 * quantity); break;
+ <br/>       }
+  <br/>      return true;
+  <br/>  },
+ <br/>   voidLastTransaction : function(){
+ <br/>       this.total -= this.lastTransactionAmount;
+<br/>        this.lastTransactionAmount = 0;
+<br/>    },
+<br/>    // Create a new method applyStaffDiscount here
+<br/>    applyStaffDiscount: function(employee){
+<br/>        this.total -= this.total * (employee.discountPercent / 100);
+<br/>    }
+    
+<br/>};
+
+<br/>cashRegister.scan('eggs',1);
+<br/>cashRegister.scan('milk',1);
+<br/>cashRegister.scan('magazine',3);
+<br/>// Apply your staff discount by passing the 'me' object 
+<br/>// to applyStaffDiscount
+<br/>cashRegister.applyStaffDiscount(me);
+
+<br/>// Show the total bill
+<br/>console.log('Your bill is '+cashRegister.total.toFixed(2));
+</body>
+</html>
